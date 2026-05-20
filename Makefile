@@ -3,13 +3,16 @@ build:
 	opam2web -o website/ opam-repository/
 	cp -r ext/* website/ext
 
+IMAG=ghcr.io/uq-pac/opam-repository/opam2web:latest
+
 buildcont:
-	podman run -v .:/w:z ghcr.io/agle/bincaml-ci-containers/opam2web:latest opam2web -o website/ opam-repository/
+	podman run -v .:/w:z $(IMAG) opam2web -o website/ opam-repository/
 	cp -r ext/* website/ext
 
+
 image:
-	podman build . -t ghcr.io/agle/bincaml-ci-containers/opam2web:latest
+	podman build . -t $(IMAG) 
 
 upload-ci:
-	podman push ghcr.io/agle/bincaml-ci-containers/opam2web:latest	|| \
+	podman push $(IMAG)	|| \
 	( echo  "to login:  podman login ghcr.io -u <your-github-username>" ; exit 1 )
