@@ -1,0 +1,6 @@
+# Contains the documentation menu with the following syntax:
+# <string> without extension -> A menu title
+# <string>.md -> A markdown page
+# empty <string> -> A menu divider
+About.md
+Basic_Usage.md
